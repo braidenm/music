@@ -1,0 +1,26 @@
+package com.mountainmusicco.music.entities;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+@Entity
+public class Employee {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	int id;
+	String title;
+	@Column(name="pay_rate")
+	double payRate;
+	String email;
+	@ManyToOne
+	Address address;
+	@OneToOne
+	User user;
+	
+}

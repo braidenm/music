@@ -1,0 +1,13 @@
+package com.mountainmusicco.music.entities;
+
+
+@Entity
+public class Venue {
+	
+	// F E I L D S
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+
+}

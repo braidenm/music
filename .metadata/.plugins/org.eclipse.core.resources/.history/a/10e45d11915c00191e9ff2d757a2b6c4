@@ -1,0 +1,29 @@
+package com.mountainmusicco.music.entities;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class User {
+	
+	// F E I L D S
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	int id;
+	@Column(name = "first_name")
+	String fname;
+	@Column(name = "last_name")
+	String lname;
+	@Column(name = "username")
+	String userName;
+	String password;
+	boolean enabled;
+	String role;
+	
+	
+	
+}

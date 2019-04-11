@@ -1,0 +1,9 @@
+package com.mountainmusicco.music.entities;
+
+@Entity
+public class User {
+	
+	// F E I L D S
+	
+
+}

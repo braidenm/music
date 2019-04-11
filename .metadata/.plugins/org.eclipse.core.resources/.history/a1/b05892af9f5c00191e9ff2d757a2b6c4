@@ -1,0 +1,12 @@
+package com.mountainmusicco.music.entities;
+
+@Entity
+public class Event {
+
+	
+	// F E I L D S
+	 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	int id;
+}

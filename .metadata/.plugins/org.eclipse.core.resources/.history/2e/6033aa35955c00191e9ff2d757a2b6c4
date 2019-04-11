@@ -1,0 +1,23 @@
+package com.mountainmusicco.music.entities;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Address {
+
+	// F E I L D S
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	int id;
+	String street;
+	@Column(name="street_2")
+	String street2;
+	String city;
+	String state;
+	String zip;
+}

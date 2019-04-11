@@ -1,0 +1,43 @@
+package com.mountainmusicco.music.entities;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+@Entity
+public class Event {
+
+	
+	// F E I L D S
+	 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	int id;
+	String name;
+	String category;
+	@Column(name = "paid_in_full")
+	boolean paid;
+	@Column(name = "amount_paid")
+	int amountPaid;
+	@Column(name = "created_at")
+	@CreationTimestamp
+	private Date createdAt;
+	@Column(name = "updated_at")
+	@UpdateTimestamp
+	private Date updatedAt;
+	@ManyToOne
+	@JoinColumn(name = "package_id")
+	Package packageType;
+	
+	
+	
+}
