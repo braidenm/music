@@ -4,4 +4,4 @@ pluginManagement {
 	}
 }
 rootProject.name = 'MMCREST'
-use 'MMCJPA'
+includeFlat 'MMCJPA'
