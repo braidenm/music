@@ -165,7 +165,7 @@ public class Client {
 				events.add(event);
 				event.addClient(this);
 			}
-			
+		
 			return event;
 		}
 
