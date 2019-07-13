@@ -93,6 +93,7 @@ public class VendorServiceImpl implements VendorService {
 				List<VendorNote> notes = ven.getNotes();
 				
 				for(VendorNote note: notes) {
+					note.setVendor(null);
 					vnRepo.deleteById(note.getId());
 				}
 				

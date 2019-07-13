@@ -8,6 +8,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mountainmusicco.music.entities.Client;
 import com.mountainmusicco.music.entities.Employee;
 import com.mountainmusicco.music.entities.EmployeeNote;
 import com.mountainmusicco.music.entities.Event;
@@ -107,7 +108,21 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 				List<Event> events = emp.getEvents();
 
+				// TODO may need to do to these other service and delete event from these
+				// objects
 				for (Event event : events) {
+					for (Client client : event.getClients()) {
+
+						event.removeClient(client);
+					}
+					
+					for(Employee employee: event.getEmployees()) {
+						
+						event.removeEmployee(employee);
+					}
+					event.setNotes(null);
+					event.setVendors(null);
+					event.setVenues(null);
 					evRepo.deleteById(event.getId());
 				}
 				emp.setEvents(null);
@@ -131,7 +146,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 		} else {
 			System.err.println("Not admin or Not valid");
 		}
-		
 
 	}
 

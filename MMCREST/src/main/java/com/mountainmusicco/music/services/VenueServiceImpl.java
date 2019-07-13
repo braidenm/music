@@ -90,6 +90,7 @@ public class VenueServiceImpl implements VenueService {
 				List<VenueNote> notes = ven.getNotes();
 				
 				for(VenueNote note : notes) {
+					note.setVenue(null);
 					vnRepo.deleteById(note.getId());
 				}
 				ven.setNotes(null);

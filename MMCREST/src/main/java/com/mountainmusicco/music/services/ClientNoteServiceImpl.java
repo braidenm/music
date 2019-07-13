@@ -7,66 +7,70 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mountainmusicco.music.entities.Address;
+import com.mountainmusicco.music.entities.Client;
+import com.mountainmusicco.music.entities.ClientNote;
 import com.mountainmusicco.music.entities.User;
-import com.mountainmusicco.music.repositories.AddressRepo;
+import com.mountainmusicco.music.repositories.ClientNoteRepo;
+import com.mountainmusicco.music.repositories.ClientRepo;
 import com.mountainmusicco.music.repositories.UserRepo;
 
 @Service
-public class AddressServiceImpl implements AddressService {
+public class ClientNoteServiceImpl implements ClientNoteService {
 
 	@Autowired
-	AddressRepo aRepo;
+	ClientNoteRepo cnRepo;
 
 	@Autowired
 	UserRepo rRepo;
-
 	
-
 	@Override
-	public Set<Address> index(String username) {
-		Set<Address> result = new HashSet<>();
+	public Set<ClientNote> index(String username) {
+		Set<ClientNote> result = new HashSet<>();
 		if (rRepo.findByUserName(username) != null) {
-			result.addAll(aRepo.findAll());
+			result.addAll(cnRepo.findAll());
 		}
 
 		return result;
 	}
 
 	@Override
-	public Address show(String username, Integer id) {
+	public ClientNote show(String username, Integer id) {
 
 		if (rRepo.findByUserName(username) != null) {
-			return aRepo.findById(id).get();
+			return cnRepo.findById(id).get();
 		}
 
 		return null;
 	}
 
 	@Override
-	public Address create(String username, Address mock) {
+	public ClientNote create(String username, ClientNote mock) {
 		User usr = rRepo.findByUserName(username);
 		if (usr != null && (usr.getRole() == "standard" || usr.getRole() == "admin")) {
 
-			return aRepo.saveAndFlush(mock);
+			return cnRepo.saveAndFlush(mock);
 
 		}
 		return null;
 	}
 
 	@Override
-	public Address update(String username, Address mock, Integer id) {
-		Optional<Address> temp = aRepo.findById(id);
+	public ClientNote update(String username, ClientNote mock, Integer id) {
+		
+		Optional<ClientNote> temp = cnRepo.findById(id);
 		User usr = rRepo.findByUserName(username);
+		
 		if (usr != null && (usr.getRole() == "standard" || usr.getRole() == "admin")) {
 			if (temp.isPresent()) {
-				Address result = temp.get();
-				result.setCity(mock.getCity());
-				result.setState(mock.getState());
-				result.setStreet(mock.getStreet());
-				result.setStreet2(mock.getStreet2());
-				result.setZip(mock.getZip());
-				return aRepo.saveAndFlush(result);
+				//TODO need to update client separately 
+				//not updating the created or updated date since those happen automatically
+				
+				ClientNote result = temp.get();
+				result.setActive(mock.isActive());
+				result.setTitle(mock.getTitle());
+				result.setNote(mock.getNote());
+				
+				return cnRepo.saveAndFlush(result);
 
 			}
 		}
@@ -80,12 +84,14 @@ public class AddressServiceImpl implements AddressService {
 		User usr = rRepo.findByUserName(username);
 
 		if (usr != null && usr.getRole() == "admin") {
-			Optional<Address> op = aRepo.findById(id);
+			Optional<ClientNote> op = cnRepo.findById(id);
 			// delete children first
 			if (op.isPresent()) {
-				Address ad = op.get();
+				ClientNote clNote = op.get();
 				
-				aRepo.delete(ad);
+				clNote.setClient(null);
+				
+				cnRepo.delete(clNote);
 			} else {
 				System.err.println("Not valid Address");
 			}
