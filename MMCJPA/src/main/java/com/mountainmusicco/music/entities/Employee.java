@@ -32,7 +32,7 @@ public class Employee {
 	@JoinColumn(name="user_id")
 	private User user;
 	@OneToMany(mappedBy = "employee")
-	private List<Note> notes;
+	private List<ClientNote> notes;
 	@ManyToMany(mappedBy = "employees")
 	private List<Event> events;
 	
@@ -101,12 +101,12 @@ public class Employee {
 	}
 	
 	
-	public List<Note> getNotes() {
+	public List<ClientNote> getNotes() {
 		return notes;
 	}
 
 	
-	public void setNotes(List<Note> notes) {
+	public void setNotes(List<ClientNote> notes) {
 		this.notes = notes;
 	}
 	

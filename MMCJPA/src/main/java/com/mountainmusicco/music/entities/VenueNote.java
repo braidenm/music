@@ -8,12 +8,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-public class Note {
+@Table(name="venue_note")
+public class VenueNote {
 
 	
 	// F E I L D S
@@ -28,40 +30,25 @@ public class Note {
 	@UpdateTimestamp
 	private Date updated;
 	@ManyToOne
-	@JoinColumn(name = "client_id")
-	private Client client;
-	@ManyToOne
-	@JoinColumn(name = "event_id")
-	private Event event;
-	@ManyToOne
 	@JoinColumn(name = "venue_id")
 	private Venue venue;
-	@ManyToOne
-	@JoinColumn(name = "vendor_id")
-	private Vendor vendor;
-	@ManyToOne
-	@JoinColumn(name = "employee_id")
-	private Employee employee;
+	
 	private boolean active;
 	
 	// C O N S T R U C T O R S
 	
-	public Note(int id, String title, String note, Date created, Date updated, Client client, Event event, Venue venue,
-			Vendor vendor, Employee employee, boolean active) {
+	public VenueNote(int id, String title, String note, Date created, Date updated, Venue venue, boolean active) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.note = note;
 		this.created = created;
 		this.updated = updated;
-		this.client = client;
-		this.event = event;
 		this.venue = venue;
-		this.vendor = vendor;
-		this.employee = employee;
+		
 		this.active = active;
 	}
-	public Note() {
+	public VenueNote() {
 		super();
 	}
 	
@@ -97,36 +84,13 @@ public class Note {
 	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}
-	public Client getClient() {
-		return client;
-	}
-	public void setClient(Client client) {
-		this.client = client;
-	}
-	public Event getEvent() {
-		return event;
-	}
-	public void setEvent(Event event) {
-		this.event = event;
-	}
 	public Venue getVenue() {
 		return venue;
 	}
 	public void setVenue(Venue venue) {
 		this.venue = venue;
 	}
-	public Vendor getVendor() {
-		return vendor;
-	}
-	public void setVendor(Vendor vendor) {
-		this.vendor = vendor;
-	}
-	public Employee getEmployee() {
-		return employee;
-	}
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
+	
 	public boolean isActive() {
 		return active;
 	}
@@ -151,7 +115,7 @@ public class Note {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Note other = (Note) obj;
+		VenueNote other = (VenueNote) obj;
 		if (id != other.id)
 			return false;
 		return true;

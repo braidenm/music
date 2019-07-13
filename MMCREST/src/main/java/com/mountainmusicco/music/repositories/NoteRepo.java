@@ -2,8 +2,8 @@ package com.mountainmusicco.music.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.mountainmusicco.music.entities.Note;
+import com.mountainmusicco.music.entities.ClientNote;
 
-public interface NoteRepo extends JpaRepository<Note, Integer> {
+public interface NoteRepo extends JpaRepository<ClientNote, Integer> {
 
 }
