@@ -48,7 +48,7 @@ class EventTest {
 	void test() {
 		
 		e = em.find(Event.class, 1);
-		List<ClientNote> notes = e.getNotes();
+		List<EventNote> notes = e.getNotes();
 		assertTrue(e != null);
 		assertTrue(e.getEmployees().size() > 1);
 		assertEquals(1200, e.getPackageType().getPrice());

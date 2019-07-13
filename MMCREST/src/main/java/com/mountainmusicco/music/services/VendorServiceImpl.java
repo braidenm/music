@@ -1,6 +1,7 @@
 package com.mountainmusicco.music.services;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -9,9 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.mountainmusicco.music.entities.User;
 import com.mountainmusicco.music.entities.Vendor;
+import com.mountainmusicco.music.entities.VendorNote;
 import com.mountainmusicco.music.repositories.UserRepo;
+import com.mountainmusicco.music.repositories.VendorNoteRepo;
 import com.mountainmusicco.music.repositories.VendorRepo;
-import com.mountainmusicco.music.repositories.VenueRepo;
 
 @Service
 public class VendorServiceImpl implements VendorService {
@@ -21,6 +23,9 @@ public class VendorServiceImpl implements VendorService {
 	
 	@Autowired
 	UserRepo rRepo;
+	
+	@Autowired
+	VendorNoteRepo vnRepo;
 
 
 	@Override
@@ -81,8 +86,26 @@ public class VendorServiceImpl implements VendorService {
 		User usr = rRepo.findByUserName(username);
 		
 		if( usr != null && usr.getRole() == "admin") {
-			 vRepo.deleteById(id);
+			Optional<Vendor> op = vRepo.findById(id);
+			//delete children first
+			if(op.isPresent()) {
+				Vendor ven = op.get();
+				List<VendorNote> notes = ven.getNotes();
+				
+				for(VendorNote note: notes) {
+					vnRepo.deleteById(note.getId());
+				}
+				
+				ven.setNotes(null);
+				vRepo.delete(ven);
+			} else {
+				
+			System.err.println("Not valid Vendor");
+			}
+		} else {
+			System.err.println("Not Admin or valid user");
 		}
+		
 		
 	}
 
