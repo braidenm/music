@@ -30,7 +30,7 @@ public class EmployeeNote {
 	@UpdateTimestamp
 	private Date updated;
 	@ManyToOne
-	@JoinColumn(name = "venue_id")
+	@JoinColumn(name = "employee_id")
 	private Employee employee;
 	
 	private boolean active;

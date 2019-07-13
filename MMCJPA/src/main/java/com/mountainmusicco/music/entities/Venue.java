@@ -28,7 +28,7 @@ public class Venue {
 	@JoinColumn(name = "owner_id")
 	private Vendor owner;
 	@OneToMany(mappedBy = "venue")
-	private List<ClientNote> notes;
+	private List<VenueNote> VenueNotes;
 	
 	//TODO maybe need to include methods for add and remove
 	@ManyToMany(mappedBy = "venues")
@@ -66,11 +66,11 @@ public class Venue {
 	public void setEvents(List<Event> events) {
 		this.events = events;
 	}
-	public List<ClientNote> getNotes() {
-		return notes;
+	public List<VenueNote> getNotes() {
+		return VenueNotes;
 	}
-	public void setNotes(List<ClientNote> notes) {
-		this.notes = notes;
+	public void setNotes(List<VenueNote> notes) {
+		this.VenueNotes = notes;
 	}
 	public String getName() {
 		return name;

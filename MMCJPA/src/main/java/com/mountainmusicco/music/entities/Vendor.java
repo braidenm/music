@@ -26,7 +26,7 @@ public class Vendor {
 	private String phone;
 	private String email;
 	@OneToMany(mappedBy = "vendor")
-	private List<ClientNote> notes;
+	private List<VendorNote> vendorNotes;
 
 	//TODO maybe need to include methods for add and remove
 	@ManyToMany(mappedBy = "vendors")
@@ -57,11 +57,11 @@ public class Vendor {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public List<ClientNote> getNotes() {
-		return notes;
+	public List<VendorNote> getNotes() {
+		return vendorNotes;
 	}
-	public void setNotes(List<ClientNote> notes) {
-		this.notes = notes;
+	public void setNotes(List<VendorNote> notes) {
+		this.vendorNotes = notes;
 	}
 	public String getFname() {
 		return fname;

@@ -38,7 +38,7 @@ public class Event {
 	@JoinColumn(name = "package_id")
 	private Package packageType;
 	@OneToMany(mappedBy = "event")
-	private List<ClientNote> notes;
+	private List<EventNote> eventNotes;
 	@ManyToMany
 	@JoinTable(name="employee_event",
 	joinColumns=@JoinColumn(name="event_id"),
@@ -112,11 +112,11 @@ public class Event {
 	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
 	}
-	public List<ClientNote> getNotes() {
-		return notes;
+	public List<EventNote> getNotes() {
+		return eventNotes;
 	}
-	public void setNotes(List<ClientNote> notes) {
-		this.notes = notes;
+	public void setNotes(List<EventNote> notes) {
+		this.eventNotes = notes;
 	}
 	public String getName() {
 		return name;

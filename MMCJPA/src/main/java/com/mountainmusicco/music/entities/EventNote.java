@@ -30,7 +30,7 @@ public class EventNote {
 	@UpdateTimestamp
 	private Date updated;
 	@ManyToOne
-	@JoinColumn(name = "venue_id")
+	@JoinColumn(name = "event_id")
 	private Event event;
 	
 	private boolean active;

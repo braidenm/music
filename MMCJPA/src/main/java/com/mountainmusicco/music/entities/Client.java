@@ -36,7 +36,7 @@ public class Client {
 	@JoinColumn(name="address_id")
 	private Address address;
 	@OneToMany(mappedBy = "client")
-	private List<ClientNote> notes;
+	private List<ClientNote> clientNotes;
 	@ManyToMany
 	@JoinTable(name="client_event",
 	joinColumns=@JoinColumn(name="client_id"),
@@ -77,10 +77,10 @@ public class Client {
 		this.events = events;
 	}
 	public List<ClientNote> getNotes() {
-		return notes;
+		return clientNotes;
 	}
 	public void setNotes(List<ClientNote> notes) {
-		this.notes = notes;
+		this.clientNotes = notes;
 	}
 	public String getFname() {
 		return fname;

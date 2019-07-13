@@ -30,7 +30,7 @@ public class VendorNote {
 	@UpdateTimestamp
 	private Date updated;
 	@ManyToOne
-	@JoinColumn(name = "venue_id")
+	@JoinColumn(name = "vendor_id")
 	private Vendor vendor;
 	
 	private boolean active;
