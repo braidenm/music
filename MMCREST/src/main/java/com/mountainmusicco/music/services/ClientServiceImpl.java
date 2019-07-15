@@ -1,17 +1,21 @@
 package com.mountainmusicco.music.services;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mountainmusicco.music.entities.Address;
 import com.mountainmusicco.music.entities.Client;
-import com.mountainmusicco.music.entities.Client;
+import com.mountainmusicco.music.entities.Event;
 import com.mountainmusicco.music.entities.User;
+import com.mountainmusicco.music.repositories.AddressRepo;
 import com.mountainmusicco.music.repositories.ClientNoteRepo;
 import com.mountainmusicco.music.repositories.ClientRepo;
+import com.mountainmusicco.music.repositories.EventRepo;
 import com.mountainmusicco.music.repositories.UserRepo;
 
 @Service
@@ -22,6 +26,17 @@ public class ClientServiceImpl implements ClientService {
 
 	@Autowired
 	UserRepo rRepo;
+	
+	@Autowired
+	AddressRepo aRepo;
+	
+	@Autowired
+	ClientNoteRepo nRepo;
+	
+	@Autowired
+	EventRepo eRepo;
+	
+	
 	
 	@Override
 	public Set<Client> index(String username) {
@@ -71,6 +86,8 @@ public class ClientServiceImpl implements ClientService {
 				result.setFianceeLname(mock.getFianceeLname());
 				result.setFname(mock.getFname());
 				result.setLname(mock.getLname());
+				result.setPhone(mock.getPhone());
+				
 				
 				return cRepo.saveAndFlush(result);
 
@@ -89,12 +106,26 @@ public class ClientServiceImpl implements ClientService {
 			Optional<Client> op = cRepo.findById(id);
 			// delete children first
 			if (op.isPresent()) {
-				Client clNote = op.get();
+				Client client = op.get();
+				
+				//Remove the client at the clients events to null;
+				List<Event> eventList = client.getEvents();
+				for(Event event: eventList) {
+					event.removeClient(client);
+					eRepo.saveAndFlush(event);
+				}
+				
+				Address clAdd = client.getAddress();
+				
+				clAdd = null;
+				
+				client.setNotes(null);
 				
 				
-				cRepo.delete(clNote);
+				cRepo.delete(client);
+				
 			} else {
-				System.err.println("Not valid Address");
+				System.err.println("Not valid Client");
 			}
 			
 		} else {
