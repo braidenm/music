@@ -8,6 +8,9 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { HomeComponent } from './components/home/home.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { FormsModule } from '@angular/forms';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -15,10 +18,13 @@ import { AdminComponent } from './components/admin/admin.component';
     LoginComponent,
     NavBarComponent,
     HomeComponent,
-    AdminComponent
+    AdminComponent,
+    NotFoundComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     NgbModule,
     AppRoutingModule
   ],
