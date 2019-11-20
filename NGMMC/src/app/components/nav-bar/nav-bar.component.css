@@ -1,0 +1,9 @@
+.right {
+  text-align: right;
+  align-content: right;
+  display: inline-block;
+  width: 90%;
+}
+nav {
+  background-color: black;
+}

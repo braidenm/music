@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { User } from './../../models/user';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -8,20 +9,24 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  user: User = new User();
+  user: User;
+  invalidLogin = false;
 
-  dataBase: any = {
-    userName: 'employee',
-    password: 'password'
-  };
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
+    this.user = new User();
+    if (this.authService.checkLoggedIn()) {
+      this.router.navigateByUrl('dash');
+    }
   }
 
   login() {
-    if (this.user.userName === this.dataBase.userName && this.user.password === this.dataBase.password) {
-        this.router.navigateByUrl('dash');
+    if (this.authService.login(this.user.userName, this.user.password)) {
+      this.invalidLogin = false;
+      this.router.navigateByUrl('dash');
+    } else {
+      this.invalidLogin = true;
     }
   }
 

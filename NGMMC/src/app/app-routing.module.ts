@@ -1,3 +1,5 @@
+import { AboutComponent } from './components/about/about.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { NgModule } from '@angular/core';
@@ -10,6 +12,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'dash', component: DashboardComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: 'about', component: AboutComponent },
   { path: '**', component: NotFoundComponent },
 ];
 
