@@ -1,10 +1,9 @@
 package com.mountainmusicco.music.entities;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -80,7 +79,6 @@ class EventTest {
 //		nums.add(e);
 //		
 //		cacheContents(nums);
-		
 		
 	}
 //	public static List<Integer> cacheContents(List<List<Integer>> callLogs) {
